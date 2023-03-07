@@ -1,4 +1,4 @@
-# Destini
+# Black Mirror Simulator
 
 ## Introduction
 
