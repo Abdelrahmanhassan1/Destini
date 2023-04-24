@@ -2,14 +2,17 @@ import 'story.dart';
 import 'story_brain.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(Destini());
+void main() => runApp(const Destini());
 
 class Destini extends StatelessWidget {
+  const Destini({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: StoryPage(),
+      home: const StoryPage(),
     );
   }
 }
@@ -17,6 +20,8 @@ class Destini extends StatelessWidget {
 StoryBrain storybrain = StoryBrain();
 
 class StoryPage extends StatefulWidget {
+  const StoryPage({super.key});
+
   _StoryPageState createState() => _StoryPageState();
 }
 
@@ -25,14 +30,14 @@ class _StoryPageState extends State<StoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: const DecorationImage(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
             image: AssetImage('images/background.png'),
             fit: BoxFit.cover,
           ),
         ),
-        padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
-        constraints: BoxConstraints.expand(),
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
+        constraints: const BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +48,7 @@ class _StoryPageState extends State<StoryPage> {
                   child: Text(
                     storybrain.getStory(),
                     textAlign: TextAlign.justify,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25.0,
                     ),
                   ),
@@ -51,38 +56,46 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {
                     setState(() {
                       storybrain.nextStory(1);
                     });
                   },
-                  color: Colors.red,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                  ),
                   child: Text(
                     storybrain.getChoice1(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20.0,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Expanded(
                 flex: 2,
                 child: Visibility(
                   visible: storybrain.buttonShouldBeVisible(),
-                  child: FlatButton(
+                  child: TextButton(
                     onPressed: () {
-                      setState(() {
-                        storybrain.nextStory(2);
-                      });
+                      setState(
+                        () {
+                          storybrain.nextStory(2);
+                        },
+                      );
                     },
-                    color: Colors.blue,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                    ),
                     child: Text(
                       storybrain.getChoice2(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
